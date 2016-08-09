@@ -1,11 +1,38 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import style from '../../sass/style'
+
+//components
+import Board from '../components/Board'
+
+//action
+import { put } from '../action/gomoku'
 
 class Gomoku extends React.Component{
   render(){
+  console.log( this.props );
     return (
-      <h1>Gomoku</h1>
+      <div>
+        <h1 className={ style.title }>Gomoku</h1>
+        <Board 
+          board={this.props.gomoku.board} 
+          onPut={this.props.onPut}
+         />
+      </div>
     )
   }
 }
+function mapStateToProps(state){
+  return {
+    gomoku: state
+  }
+}
 
-export default Gomoku
+
+export default connect(
+    mapStateToProps,
+    {
+      onPut: put
+    }
+)(Gomoku)
