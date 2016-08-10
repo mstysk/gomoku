@@ -7,12 +7,11 @@ import Mass from './Mass'
 class Row extends React.Component{
 
   render(){
-    console.log(this.props);
     return (
         <div>
-        {this.props.row.map(function(x, i){
+        {this.props.row.map((mass, x) => {
           return (
-            <Mass key={i} />
+            <Mass key={x} x={x} y={this.props.y} mass={mass} />
             )
         })}
         </div>

@@ -1,11 +1,12 @@
 export const PUT = 'PUT';
 
-export function put(x, y){
+export function put(x, y, player){
   return (dispatch, getState) => {
     return dispatch({
       type: PUT,
       x: x,
-      y: y
+      y: y,
+      player: player
     })
   }
 }

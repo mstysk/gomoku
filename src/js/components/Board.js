@@ -1,22 +1,21 @@
 import React from 'react'
 
+//styles
+import style from '../../sass/style'
+
 //components
 import Row from './Row'
 
 class Board extends React.Component{
 
-  constructor(props){
-    super(props)
-  }
-
   render(){
     console.log(this.props);
     return (
         <div>
-        {this.props.board.map(function(x, i){
+        {this.props.board.map((row, y) => {
           return (
-            <div>
-              <Row key={i} row={x} />
+            <div key={y} className={ style.board }>
+              <Row row={row} y={y} />
             </div>
             )
         })}

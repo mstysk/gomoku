@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+//styles
 import style from '../../sass/style'
 
 //components
@@ -11,9 +12,8 @@ import { put } from '../action/gomoku'
 
 class Gomoku extends React.Component{
   render(){
-  console.log( this.props );
     return (
-      <div>
+      <div className={ style.wrap }>
         <h1 className={ style.title }>Gomoku</h1>
         <Board 
           board={this.props.gomoku.board} 
