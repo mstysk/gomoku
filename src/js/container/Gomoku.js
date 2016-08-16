@@ -25,7 +25,7 @@ class Gomoku extends React.Component{
 }
 function mapStateToProps(state){
   return {
-    gomoku: state
+    gomoku: state.gomokuApp
   }
 }
 

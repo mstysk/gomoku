@@ -1,7 +1,13 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
-import gomokuApp from '../reducers/gomokuApp'
+import reducer from '../reducers/'
 
-const store = createStore(gomokuApp)
+const createStoreWithMiddleware = applyMiddleware(
+  thunk
+)(createStore)
 
-export default store
+export default function configureStore(initialState) {
+  return createStoreWithMiddleware(reducer, initialState)
+}
+

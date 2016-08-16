@@ -1,5 +1,6 @@
-import gomokuApp from './gomokuApp'
 import { combineReducers } from 'redux'
+
+import gomokuApp from './gomokuApp'
 
 export default combineReducers({ 
   gomokuApp 

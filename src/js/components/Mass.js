@@ -4,8 +4,10 @@ import React from 'react'
 import style from '../../sass/style'
 import font from 'font-awesome-webpack'
 
-class Mass extends React.Component{
+//Const
+import { WHITE, BLACK, NON } from '../reducers/gomokuApp'
 
+class Mass extends React.Component{
   render(){
     return(
         <span className={ style.mass } >

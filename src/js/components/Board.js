@@ -14,7 +14,7 @@ class Board extends React.Component{
         {this.props.board.map((row, y) => {
           return (
             <div key={y} >
-              <Row row={row} y={y} />
+              <Row row={row} y={y} onPut={this.props.onPut}/>
             </div>
             )
         })}
