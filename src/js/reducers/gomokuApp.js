@@ -2,7 +2,7 @@ export const WHITE = 1;
 export const BLACK = -1;
 export const NON   = 0;
 
-function changePlayer(player){
+function ChangePlayer(player){
   switch(player){
     case WHITE:
       return BLACK;
@@ -11,28 +11,45 @@ function changePlayer(player){
   }
 }
 
-function inc(num){
+function Inc(num){
   return ++num;
 }
-function dec(num){
+function Dec(num){
   return --num;
 }
-function alone(num){
+function Alone(num){
   return num;
 }
 
-function survey(board, x, y, player, nextX, nextY, counter){
+function Survey(board, x, y, player, nextX, nextY, counter){
   if( y < 0 || x < 0) return counter;
-  return (board[y][x] === player) ? survey(board, nextX(x), nextY(y), player, nextX, nextY, ++counter) : counter;
+  return (board[y][x] === player) ? Survey(board, nextX(x), nextY(y), player, nextX, nextY, ++counter) : counter;
 }
 
 function Vertical(board, x, y, player){
-  var top_y  = y - 1;
-  var down_y = y + 1;
   return 1 +
-    survey(board, x, down_y, player, alone, inc, 0) +
-    survey(board, x, top_y, player, alone, dec, 0) ;
+    Survey(board, x, y + 1, player, Alone, Inc, 0) +
+    Survey(board, x, y - 1, player, Alone, Dec, 0) ;
 }
+
+function Horizon(board, x, y, player){
+  return 1 +
+    Survey(board, x + 1, y, player, Inc, Alone, 0) +
+    Survey(board, x - 1, y, player, Dec, Alone, 0) ;
+}
+
+function UpperRight(board, x, y, player){
+  return 1 +
+    Survey(board, x + 1, y - 1, player, Inc, Dec, 0) +
+    Survey(board, x - 1, y + 1, player, Dec, Inc, 0) ;
+}
+
+function DownRight(board, x, y, player){
+  return 1 +
+    Survey(board, x + 1, y + 1, player, Inc, Inc, 0) +
+    Survey(board, x - 1, y - 1, player, Dec, Dec, 0) ;
+}
+
 
 const initialState = {
   player: WHITE,
@@ -60,13 +77,14 @@ import * as ActionTypes from '../action/gomoku'
 function gomokuApp(state = initialState, action){
   switch(action.type){
     case ActionTypes.PUT:
-      let vertical = Vertical(state.board, action.x, action.y, state.player);
-      let changed_player = changePlayer(state.player);
+      let vertical    = Vertical(  state.board, action.x, action.y, state.player);
+      let horizon     = Horizon(   state.board, action.x, action.y, state.player);
+      let upper_right = UpperRight(state.board, action.x, action.y, state.player);
+      let down_right  = DownRight( state.board, action.x, action.y, state.player);
+
       var next_board = state.board;
       next_board[action.y][action.x] = state.player;
-      var a = Object.assign({}, state, { board: next_board }, { player: changed_player })
-        console.log(a);
-      return a;
+      return  Object.assign({}, state, { board: next_board }, { player: ChangePlayer(state.player) })
   }
   return state;
 }
