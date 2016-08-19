@@ -1,6 +1,8 @@
 .wrap
   margin: 0 auto
   width: 600px
+.container
+  display: flex
 .board
   display: flex
 .mass
@@ -22,3 +24,19 @@
   color: #000
 .title 
   composes: title is-3 from 'bulma'
+.mask
+  position: absolute
+  top: 0
+  left: 0
+  background-color: #efefef
+  opacity: .2
+  width: 100%
+  height: 100%
+.information
+  width: 30%
+  margin-left: 5px
+  background-color: #FFF
+  color: #333
+.histories
+  height: 430px
+  overflow-y: scroll

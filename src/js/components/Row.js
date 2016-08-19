@@ -9,7 +9,7 @@ import White from './White'
 import Black from './Black'
 
 //Contents
-import {WHITE, BLACK, NON } from '../reducers/gomokuApp'
+import {WHITE, BLACK, NON } from '../config'
 
 
 class Row extends React.Component{
